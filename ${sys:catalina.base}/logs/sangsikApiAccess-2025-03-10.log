@@ -1,0 +1,2 @@
+2025-03-10 08:41:19.664 [][][] INFO  --- [main] com.doinglab.sangsik.SangsikServerApplicationKt : Starting SangsikServerApplicationKt using Java 21.0.1 with PID 5674 (/Users/kookoo135/doinglab/Server_SangsikApi/build/classes/kotlin/main started by kookoo135 in /Users/kookoo135/doinglab/Server_SangsikApi) 
+2025-03-10 08:41:19.671 [][][] INFO  --- [main] com.doinglab.sangsik.SangsikServerApplicationKt : The following 1 profile is active: "prod" 

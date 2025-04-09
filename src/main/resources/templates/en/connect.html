@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>CGM Integration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content {
+            width: 100%;
+            margin-top: 172px;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 56px;
+            height: 56px;
+            background-color: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .success-icon::after {
+            content: "✓";
+            color: #2C5601;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .title {
+            font-size: 17px;
+            font-weight: 500;
+            color: #132800;
+            margin-bottom: 24px;
+        }
+
+        .description {
+            font-family: 'SF Pro';
+            font-size: 14px;
+            font-weight: 500;
+            color: #535353;
+            line-height: 22px;
+            margin-bottom: 24px;
+        }
+
+        .info-text {
+            font-family: 'SF Pro';
+            font-weight: 274;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0px;
+            text-align: center;
+            color: #535353;
+            margin-bottom: 24px;
+        }
+
+        .confirm-button {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2C5600;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 9999px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .confirm-button:active {
+            background-color: #234815;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="success-icon"></div>
+    <h2 class="title">CareSens Air has been integrated</h2>
+    <p class="description">Please check your blood sugar trend in the <br/> Blood Sugar tab of the Food Journal.</p>
+    <p class="info-text">
+        * If it was linked to another device or account, <br/>
+        the previous link will be automatically disconnected.
+    </p>
+    <button class="confirm-button" onclick="confirmCGMIntegration()">Confirm</button>
+</div>
+
+<script>
+    function confirmCGMIntegration() {
+        try {
+            // Android
+            if (window.Android) {
+                window.Android.confirmCGMIntegration('confirmed');
+            }
+            // iOS
+            else if (window.webkit && window.webkit.messageHandlers) {
+                window.webkit.messageHandlers.confirmCGMIntegration.postMessage('confirmed');
+            }
+        } catch (e) {
+            console.error('Failed to communicate with app:', e);
+        }
+    }
+</script>
+</body>
+</html>

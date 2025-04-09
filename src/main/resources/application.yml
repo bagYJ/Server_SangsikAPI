@@ -1,0 +1,121 @@
+spring:
+  diet:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DIETDIARY_USERNAME}
+    password: ${DIETDIARY_PASSWORD}
+  auth:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${AUTH_USERNAME}
+    password: ${AUTH_PASSWORD}
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 120MB
+      max-request-size: 120MB
+server:
+  error:
+    include-stacktrace: never
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+logging:
+  level:
+    org:
+      springframework:
+        scheduling: info
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    operations-sorter: alpha
+  default-produces-media-type: application/json
+client:
+  foodlens:
+    uri: https://api.foodlens.ai
+    id: ${FOODLENS_ID}
+    passwd: ${FOODLENS_PASSWORD}
+mail:
+  from: support@doinglab.com
+  password-code-limit: 15
+  ko:
+    personal: '(주) 두잉랩'
+    address: '서울특별시 강남구 선릉로93길 27, 아름빌딩 5층'
+    check-email:
+      title: '[Sangsik Plus] 회원님의 계정을 다시 확인해 주세요.'
+      resource: /mail/ko/check_email.html
+    reset-password-code:
+      title: '[Sangsik Plus] 비밀번호 재설정 코드가 발송되었어요..'
+      resource: /mail/ko/reset_password_code.html
+  en:
+    personal: 'doinglab'
+    address: '5F, 27 Seolleung-ro 93-gil, Gangnam-gu, Seoul, Republic of Korea'
+    check-email:
+      title: '[SangsikPlus] Please check your account.'
+      resource: /mail/en/check_email.html
+    reset-password-code:
+      title: '[ Sangsik Plus ] Password reset code has been delivered.'
+      resource: /mail/en/reset_password_code.html
+inquiry:
+  to: doinglab7@gmail.com
+  title: '상식 고객센터에 1:1문의가 등록되었습니다.'
+  resource: /mail/ko/inquiry.html
+################# aws
+amazonS3:
+  accessKey: ${ACCESS_KEY}
+  secretKey: ${SECRET_KEY}
+  endpoint: https://s3.ap-northeast-2.amazonaws.com
+  regionName: ap-northeast-2
+aesEncrypt:
+  key: ${ENCRYPT_KEY}
+  iv: ${ENCRYPT_IV}
+aesDecrypt:
+  key: ${AES_DECRYPT_KEY}
+sentry:
+  dsn: ${SENTRY_DSN}
+  exception-resolver-order: -2147483647
+  traces-sample-rate: 1.0
+  max-request-body-size: always
+  send-default-pii: true
+cgm:
+  client-id: ${CGM_CLIENT_ID}
+  client-secret: ${CGM_CLIENT_SECRET}
+  timeout: 10000
+  goods-uri: "https://caresensmall.kr/mall/m_mall_detail.php?ps_ctid=08000000&partner_id=&ps_goid=239"
+  account:
+    uri: https://accounts.i-sens.com/
+    authorize:
+      path: auth/authorize
+      type-name: response_type
+      type: code
+    token:
+      path: oauth2/token
+      type-name: grant_type
+      type: authorization_code
+    refresh:
+      path: oauth2/token
+      type-name: grant_type
+      type: refresh_token
+    logout:
+      path: oauth2/token/logout
+  api:
+    uri: https://cgm.i-sens.com:10200/v1/public/
+    sensors:
+      path: sensors
+    cgms:
+      path: cgms
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL

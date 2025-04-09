@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{x-forwarded-for}][%X{request-method}][%X{request-uri}] %-5level --- [%thread] %logger{35} : %msg %n"/>
+        </Console>
+
+        <!-- Rolling File Appender for Access Logs -->
+        <RollingFile name="fileLogger" fileName="${sys:catalina.base}/logs/sangsikApiAccess.log"
+                     filePattern="${sys:catalina.base}/logs/sangsikApiAccess-%d{yyyy-MM-dd}.log">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{x-forwarded-for}][%X{request-method}][%X{request-uri}] %-5level --- [%thread] %logger{35} : %msg %n"/>
+            <Policies>
+                <!-- 날짜별로 파일 생성 -->
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <!-- 오래된 파일 자동 삭제 -->
+                <Delete basePath="${sys:catalina.base}/logs" maxDepth="1">
+                    <IfFileName glob="sangsikApiAccess-*.log" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- Rolling File Appender for Error Logs -->
+        <RollingFile name="errorLog" fileName="${sys:catalina.base}/logs/sangsikApiError.log"
+                     filePattern="${sys:catalina.base}/logs/sangsikApiError-%d{yyyy-MM-dd}.log">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{x-forwarded-for}][%X{request-method}][%X{request-uri}] %-5level --- [%thread] %logger{35} : %msg %n"/>
+            <Policies>
+                <!-- 날짜별로 파일 생성 -->
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <!-- 오래된 파일 자동 삭제 -->
+                <Delete basePath="${sys:catalina.base}/logs" maxDepth="1">
+                    <IfFileName glob="sangsikApiError-*.log" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <logger name="org.apache.http" level="DEBUG"/>
+        <logger name="org.apache.http.wire" level="DEBUG"/>
+        <Logger name="com.doinglab.sangsik" level="INFO" additivity="true">
+            <AppenderRef ref="fileLogger"/>
+        </Logger>
+        <Logger name="com.doinglab.sangsik.exceptions" level="INFO" additivity="true">
+            <AppenderRef ref="errorLog"/>
+        </Logger>
+        <Logger name="org.springframework.core" level="ERROR" additivity="true">
+        </Logger>
+        <Logger name="org.springframework.beans" level="ERROR" additivity="true">
+        </Logger>
+        <Logger name="org.springframework.context" level="ERROR" additivity="true">
+        </Logger>
+        <Logger name="org.springframework.web" level="ERROR" additivity="true">
+        </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

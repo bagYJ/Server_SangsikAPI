@@ -1,0 +1,53 @@
+spring:
+  diet:
+    jdbcUrl: ${DIET_URL}
+    maximumPoolSize: 2
+  auth:
+    jdbcUrl: ${AUTH_URL}
+    maximumPoolSize: 1
+  jpa:
+    properties:
+      hibernate:
+        use_sql_comments: true
+        format_sql: true
+        show_sql: true
+    show-sql: true
+    open-in-view: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
+server:
+  port: 8089
+
+################# aws
+amazonS3:
+  bucketName: doinglab-dev-photo
+  eatHistory:
+    bucketName: eat-history-dev-photo
+  chat:
+    bucketName: doinglab-dev-photo
+  staffResource:
+    bucketName: staffresource-dev
+  staffHealthcare:
+    bucketName: healthcare-staff
+  inquiry:
+    bucketName: doinglab-dev-photo
+activeMQ:
+  queueName: Chat_Dev
+  cgmQueue:
+    name: Cgm_Dev
+    group:
+      scrap: cgmScrapDev
+      batch: cgmBatchDev
+webhook:
+  slack:
+    url: ${SLACK_URL}
+sentry:
+  environment: development
+cgm:
+  redirect-uri: https://sangsik.api.doinglab.dev/cgm/connect

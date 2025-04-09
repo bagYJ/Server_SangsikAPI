@@ -1,0 +1,40 @@
+spring:
+  diet:
+    jdbcUrl: ${DIET_URL}
+    maximumPoolSize: 2
+  auth:
+    jdbcUrl: ${AUTH_URL}
+    maximumPoolSize: 1
+logging:
+  level:
+    root: info
+  config: classpath:Log4j/log4j2-dev.xml
+
+################# aws
+amazonS3:
+  bucketName: doinglab-dev-photo
+  eatHistory:
+    bucketName: eat-history-dev-photo
+  chat:
+    bucketName: doinglab-dev-photo
+  staffResource:
+    bucketName: staffresource-dev
+  staffHealthcare:
+    bucketName: healthcare-staff
+  inquiry:
+    bucketName: doinglab-dev-photo
+
+activeMQ:
+  queueName: Chat_Dev
+  cgmQueue:
+    name: Cgm_Dev
+    group:
+      scrap: cgmScrapDev
+      batch: cgmBatchDev
+webhook:
+  slack:
+    url: ${SLACK_URL}
+sentry:
+  environment: development
+cgm:
+  redirect-uri: https://sangsik.api.doinglab.dev/cgm/connect

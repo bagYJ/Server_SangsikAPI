@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{x-forwarded-for}][%X{request-method}][%X{request-uri}] %-5level --- [%thread] %logger{35} : %msg %n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <logger name="org.apache.http" level="DEBUG"/>
+        <logger name="org.apache.http.wire" level="DEBUG"/>
+        <Logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="ERROR" additivity="true">
+        </Logger>
+
+<!--        <Logger name="org.jetbrains.exposed.spring.SpringTransactionManager" level="ERROR" additivity="true">-->
+<!--        </Logger>-->
+
+        <Logger name="org.springframework.web" level="ERROR" additivity="true">
+        </Logger>
+
+        <Logger name="com.zaxxer.hikari.pool.HikariPool" level="ERROR" additivity="true">
+        </Logger>
+
+        <Logger name="com.zaxxer.hikari.pool.HikariPool" level="ERROR" additivity="true">
+        </Logger>
+
+        <Logger name="org.apache.http" level="ERROR" additivity="true">
+        </Logger>
+
+        <Logger name="Exposed" level="DEBUG" additivity="true">
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
